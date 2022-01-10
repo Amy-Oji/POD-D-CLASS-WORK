@@ -11,5 +11,7 @@ public class QuestionModel {
 
     private Long id;
     private String title;
-    private String Description;
+    private String description;
+    private String createdAt;
+    private String updatedAt;
 }
