@@ -4,6 +4,8 @@ import com.example.poddclasswork.Payload.QuestionRequest;
 import com.example.poddclasswork.Payload.QuestionResponse;
 import com.example.poddclasswork.model.QuestionModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +22,21 @@ public class QuestionController {
         this.restTemplate = restTemplate;
     }
 
+//    @PostMapping("/question")
+//    public QuestionResponse postAQuestion(@RequestBody QuestionRequest questionRequest){
+//        // calling daro api
+//        QuestionResponse questionResponse =
+//                restTemplate.postForObject("http://localhost:8000/questions", questionRequest, QuestionResponse.class);
+//
+//
+//        System.out.println(questionResponse.getId());
+//        System.out.println(questionResponse.getDescription());
+//
+//        return questionResponse;
+//    }
+
     @PostMapping("/question")
-    public void postAQuestion(@RequestBody QuestionRequest questionRequest){
+    public ResponseEntity postAQuestion(@RequestBody QuestionRequest questionRequest){
         // calling daro api
         QuestionResponse questionResponse =
                 restTemplate.postForObject("http://localhost:8000/questions", questionRequest, QuestionResponse.class);
@@ -29,5 +44,7 @@ public class QuestionController {
 
         System.out.println(questionResponse.getId());
         System.out.println(questionResponse.getDescription());
+
+        return new ResponseEntity(questionResponse, HttpStatus.OK);
     }
 }
